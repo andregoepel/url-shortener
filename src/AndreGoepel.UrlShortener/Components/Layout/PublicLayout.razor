@@ -1,21 +1,21 @@
 @inherits LayoutComponentBase
 
-<div class="public-shell">
-    <header class="public-header">
-        <a class="public-brand" href="/">url.shortener</a>
-        @* Static-SSR-safe theme switch: plain onclick calls the design system's theme API
-           (window.agTheme, from theme.js) — no Blazor circuit needed on the public page. *@
-        <button type="button" class="theme-toggle" title="Toggle light / dark"
-                aria-label="Toggle light or dark theme"
-                onclick="window.agTheme.set(window.agTheme.resolved() === 'dark' ? 'light' : 'dark')">
-            ◐ Theme
-        </button>
-    </header>
+@* A plain, centred canvas for the public page — the same feel as the design system's sign-in
+   screen (LoginShell): brand + card centred on the page background, with a small footer. *@
+<div class="public-page">
+    @* Static-SSR-safe theme switch: plain onclick calls the design system's theme API
+       (window.agTheme, from theme.js) — no Blazor circuit needed on the public page. *@
+    <button type="button" class="public-theme" title="Toggle light / dark"
+            aria-label="Toggle light or dark theme"
+            onclick="window.agTheme.set(window.agTheme.resolved() === 'dark' ? 'light' : 'dark')">
+        ◐
+    </button>
+
     <main class="public-main">
         @Body
     </main>
-    <footer class="public-footer">
-        <span>url.shortener © @DateTime.UtcNow.Year</span>
-        <a href="/Account/Login">Admin sign in</a>
+
+    <footer class="public-foot">
+        url.shortener © @DateTime.UtcNow.Year · <a href="/Account/Login">Admin sign in</a>
     </footer>
 </div>

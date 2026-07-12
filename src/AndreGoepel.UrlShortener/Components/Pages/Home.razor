@@ -6,57 +6,71 @@
 
 <PageTitle>url.shortener</PageTitle>
 
-<section class="shortener">
-    <h1>Shorten a URL</h1>
+@* Mirrors the design system's sign-in screen: centred brand + ag-login-card. *@
+<div class="ag-login-inner">
+    <div class="ag-login-brand">
+        <span class="ag-brand-mark">U</span>
+        <span class="ag-brand-name">url.shortener</span>
+    </div>
 
-    @if (_created is not null)
-    {
-        var shortUrl = $"{_baseUrl}/s/{_created.Id}";
-        <div class="result">
-            <p class="result-label">Your short link</p>
-            <a class="result-url" href="@shortUrl">@shortUrl</a>
-            <img class="result-qr" src="/s/@_created.Id/qr" width="200" height="200"
-                 alt="QR code for @shortUrl" />
-            <p><a class="result-again" href="/">Shorten another</a></p>
-        </div>
-    }
-    else
-    {
-        @if (_error is not null)
+    <div class="ag-login-card">
+        @if (_created is not null)
         {
-            <div class="form-error" role="alert">@_error</div>
+            var shortUrl = $"{_baseUrl}/s/{_created.Id}";
+            <div class="ag-login-head">
+                <h1>Your short link</h1>
+                <p class="ag-login-sub">Copy it, share it, or scan the QR code.</p>
+            </div>
+            <div class="result">
+                <a class="result-url" href="@shortUrl">@shortUrl</a>
+                <img class="result-qr" src="/s/@_created.Id/qr" width="180" height="180"
+                     alt="QR code for @shortUrl" />
+                <a class="result-again" href="/">Shorten another</a>
+            </div>
         }
+        else
+        {
+            <div class="ag-login-head">
+                <h1>Shorten a URL</h1>
+                <p class="ag-login-sub">Paste a long link to get a short, shareable one.</p>
+            </div>
 
-        @* EditForm auto-emits the antiforgery token in static SSR — do NOT add an explicit
-           <AntiforgeryToken /> as well, or the duplicate field is read as "token,token" and
-           rejected with "A valid antiforgery token was not provided". *@
-        <EditForm FormName="shorten" Model="Input" OnValidSubmit="SubmitAsync" method="post"
-                  class="shorten-form">
-            <label class="field">
-                <span>Destination URL</span>
-                <InputText @bind-Value="Input.Url" placeholder="https://example.com/very/long/path" />
-            </label>
+            @if (_error is not null)
+            {
+                <div class="form-error" role="alert">@_error</div>
+            }
 
-            <details class="options">
-                <summary>More options</summary>
+            @* EditForm auto-emits the antiforgery token in static SSR — do NOT add an explicit
+               <AntiforgeryToken /> as well, or the duplicate field is read as "token,token" and
+               rejected with "A valid antiforgery token was not provided". *@
+            <EditForm FormName="shorten" Model="Input" OnValidSubmit="SubmitAsync" method="post"
+                      class="shorten-form">
                 <label class="field">
-                    <span>Custom alias</span>
-                    <InputText @bind-Value="Input.CustomAlias" placeholder="my-link" />
+                    <span>Destination URL</span>
+                    <InputText @bind-Value="Input.Url" placeholder="https://example.com/very/long/path" />
                 </label>
-                <label class="field">
-                    <span>Expires on</span>
-                    <InputDate @bind-Value="Input.ExpiresOn" />
-                </label>
-                <label class="field">
-                    <span>Max clicks</span>
-                    <InputNumber @bind-Value="Input.MaxClicks" placeholder="unlimited" />
-                </label>
-            </details>
 
-            <button type="submit" class="submit">Shorten</button>
-        </EditForm>
-    }
-</section>
+                <details class="options">
+                    <summary>More options</summary>
+                    <label class="field">
+                        <span>Custom alias</span>
+                        <InputText @bind-Value="Input.CustomAlias" placeholder="my-link" />
+                    </label>
+                    <label class="field">
+                        <span>Expires on</span>
+                        <InputDate @bind-Value="Input.ExpiresOn" />
+                    </label>
+                    <label class="field">
+                        <span>Max clicks</span>
+                        <InputNumber @bind-Value="Input.MaxClicks" placeholder="unlimited" />
+                    </label>
+                </details>
+
+                <button type="submit" class="submit">Shorten</button>
+            </EditForm>
+        }
+    </div>
+</div>
 
 @code {
     [CascadingParameter]
