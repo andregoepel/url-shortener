@@ -1,5 +1,8 @@
-@* URL-shortener administrator menu entries, injected into the AppFoundation management
-   shell via AppFoundationLayoutOptions.AdminMenu. *@
-<RadzenPanelMenuItem Text="URL Shortener" Icon="link">
-    <RadzenPanelMenuItem Text="Links" Icon="list" Path="admin/links" />
-</RadzenPanelMenuItem>
+@* URL-shortener menu entries, injected into the AppFoundation management shell via
+   AppFoundationLayoutOptions.Menu. The menu now renders for all authenticated users, so the
+   admin-only Links entry is gated behind the Administrator role inside this component. *@
+<AuthorizeView Roles="Administrator">
+    <RadzenPanelMenuItem Text="URL Shortener" Icon="link">
+        <RadzenPanelMenuItem Text="Links" Icon="list" Path="admin/links" />
+    </RadzenPanelMenuItem>
+</AuthorizeView>
