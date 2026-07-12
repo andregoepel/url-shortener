@@ -5,7 +5,6 @@
    tokens, so both light and dark work. */
 
 .public-page {
-    position: relative;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -30,28 +29,6 @@
 
 .public-foot a {
     color: var(--ag-muted);
-}
-
-.public-theme {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    border: 1px solid var(--ag-border);
-    border-radius: 8px;
-    background: var(--ag-surface);
-    color: var(--ag-text);
-    font-size: 15px;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.public-theme:hover {
-    background: var(--ag-hover);
 }
 
 /* --- Form inside the ag-login-card, matched to the sign-in inputs/button --- */
