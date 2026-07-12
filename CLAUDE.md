@@ -19,6 +19,8 @@ Marten / Wolverine / Aspire). See `README.md` for the feature and route overview
 
 ## Conventions
 
+- **Language:** all GitHub issues, pull requests, and commit messages are written in **English**
+  (the working/chat language may differ).
 - Formatting is delegated to **CSharpier** (`dotnet csharpier`); `.editorconfig` handles the rest.
 - Central Package Management (`Directory.Packages.props`); lock files on (`--locked-mode` in CI).
 - The slug is the Marten document id. New document types auto-register on first use.
