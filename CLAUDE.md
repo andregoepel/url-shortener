@@ -98,6 +98,10 @@ Orchestrated via .NET Aspire. See `README.md` for the route/feature overview.
 - Implement `IDisposable` / `IAsyncDisposable` on components that subscribe to events; unsubscribe in `Dispose()`.
 
 ## Domain Notes (url-shortener-specific)
+- **Identity defaults:** no self-service account creation — `ConfigureIdentity` sets
+  `EnableUserRegistration = false` (explicit baseline). The first administrator is created via
+  `/Setup`; two-factor and passkeys stay enabled. An admin can still toggle these at runtime on the
+  Login Features page (the DB record then overrides the baseline).
 - **The slug is the Marten document id** (`ShortLink.Id`) — O(1) redirect lookup and free
   uniqueness. New document types auto-register on first use.
 - **Redirects** are anonymous minimal-API endpoints under `/s/{slug}` (+ `/s/{slug}/qr`), never

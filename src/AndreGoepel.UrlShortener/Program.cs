@@ -17,6 +17,13 @@ builder.AddAppFoundation(options =>
     // foundation otherwise only includes its own MailService handler assembly.
     options.ConfigureWolverine = wolverine =>
         wolverine.Discovery.IncludeAssembly(typeof(LinkClicked).Assembly);
+
+    // Public shortener, hybrid model: no self-service account creation. Only the
+    // administrator (created once via /Setup) signs in; link management lives behind that
+    // login. Set explicitly rather than relying on the foundation default. Two-factor and
+    // passkeys stay enabled for the administrator account. This is the baseline default —
+    // an administrator can still toggle it at runtime on the Login Features page.
+    options.ConfigureIdentity = identity => identity.EnableUserRegistration = false;
 });
 
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
