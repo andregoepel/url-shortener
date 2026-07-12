@@ -3,6 +3,13 @@
 <div class="public-shell">
     <header class="public-header">
         <a class="public-brand" href="/">url.shortener</a>
+        @* Static-SSR-safe theme switch: plain onclick calls the design system's theme API
+           (window.agTheme, from theme.js) — no Blazor circuit needed on the public page. *@
+        <button type="button" class="theme-toggle" title="Toggle light / dark"
+                aria-label="Toggle light or dark theme"
+                onclick="window.agTheme.set(window.agTheme.resolved() === 'dark' ? 'light' : 'dark')">
+            ◐ Theme
+        </button>
     </header>
     <main class="public-main">
         @Body
