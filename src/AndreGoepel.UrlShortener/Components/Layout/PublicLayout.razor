@@ -1,0 +1,14 @@
+@inherits LayoutComponentBase
+
+<div class="public-shell">
+    <header class="public-header">
+        <a class="public-brand" href="/">url.shortener</a>
+    </header>
+    <main class="public-main">
+        @Body
+    </main>
+    <footer class="public-footer">
+        <span>url.shortener © @DateTime.UtcNow.Year</span>
+        <a href="/Account/Login">Admin sign in</a>
+    </footer>
+</div>

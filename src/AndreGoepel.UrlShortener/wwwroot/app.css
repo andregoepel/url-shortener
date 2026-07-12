@@ -1,0 +1,168 @@
+:root {
+    --ag-bg: #0f172a;
+    --ag-panel: #1e293b;
+    --ag-text: #e2e8f0;
+    --ag-muted: #94a3b8;
+    --ag-accent: #4f46e5;
+    --ag-accent-hover: #4338ca;
+    --ag-border: #334155;
+    --ag-error: #f87171;
+}
+
+/* Public shell — used only by the anonymous "shorten" page (static SSR). */
+.public-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--ag-bg);
+    color: var(--ag-text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.public-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--ag-border);
+}
+
+.public-brand {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--ag-text);
+    text-decoration: none;
+}
+
+.public-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem 1.5rem;
+}
+
+.public-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--ag-border);
+    color: var(--ag-muted);
+    font-size: 0.85rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.public-footer a {
+    color: var(--ag-muted);
+}
+
+.shortener {
+    width: 100%;
+    max-width: 34rem;
+    background: var(--ag-panel);
+    border: 1px solid var(--ag-border);
+    border-radius: 0.9rem;
+    padding: 2rem;
+}
+
+.shortener h1 {
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.shorten-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.field span {
+    font-size: 0.85rem;
+    color: var(--ag-muted);
+}
+
+.field input {
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--ag-border);
+    background: #0b1220;
+    color: var(--ag-text);
+    font-size: 1rem;
+}
+
+.field input:focus {
+    outline: 2px solid var(--ag-accent);
+    border-color: var(--ag-accent);
+}
+
+.options {
+    border: 1px solid var(--ag-border);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+}
+
+.options summary {
+    cursor: pointer;
+    color: var(--ag-muted);
+}
+
+.options .field {
+    margin-top: 0.75rem;
+}
+
+.submit {
+    padding: 0.7rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--ag-accent);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background: var(--ag-accent-hover);
+}
+
+.form-error {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.5rem;
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid var(--ag-error);
+    color: var(--ag-error);
+}
+
+.result {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.result-label {
+    color: var(--ag-muted);
+    margin: 0;
+}
+
+.result-url {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ag-text);
+    word-break: break-all;
+}
+
+.result-qr {
+    background: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.result-again {
+    color: var(--ag-accent);
+}

@@ -1,0 +1,46 @@
+@inject NavigationManager NavigationManager
+@{
+    var relativePath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+    var path = relativePath.Split('?', '#')[0].Trim('/');
+
+    // The public "shorten" page ("/") renders as static SSR — no Blazor circuit per anonymous
+    // visitor, and HttpContext is available for IP-based rate limiting. Everything else (setup,
+    // sign-in, the administration area) keeps the interactive server render mode.
+    var isPublic = string.IsNullOrEmpty(path);
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="@NavigationManager.BaseUri" />
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css" />
+    <link rel="stylesheet" href="_content/AndreGoepel.AppFoundation/app.css" />
+    <link rel="stylesheet" href="@Assets["app.css"]" />
+    <link rel="stylesheet" href="@Assets["AndreGoepel.UrlShortener.styles.css"]" />
+    @if (isPublic)
+    {
+        <HeadOutlet />
+    }
+    else
+    {
+        <RadzenTheme Theme="material" @rendermode="InteractiveServer" />
+        <HeadOutlet @rendermode="InteractiveServer" />
+    }
+</head>
+
+<body>
+    @if (isPublic)
+    {
+        <Routes />
+    }
+    else
+    {
+        <Routes @rendermode="InteractiveServer" />
+        <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
+    }
+    <script src="_framework/blazor.web.js"></script>
+</body>
+
+</html>

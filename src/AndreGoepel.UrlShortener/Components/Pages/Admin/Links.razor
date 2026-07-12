@@ -1,0 +1,98 @@
+@page "/admin/links"
+@rendermode InteractiveServer
+
+@attribute [Authorize(Roles = "Administrator")]
+@inject ShortLinkService LinkService
+@inject NotificationService Notifications
+
+<PageTitle>Links – url.shortener</PageTitle>
+
+<RadzenStack Gap="1rem" class="rz-p-4">
+    <RadzenText TextStyle="TextStyle.H3" TagName="TagName.H1">Short links</RadzenText>
+
+    <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center">
+        <RadzenTextBox @bind-Value="_search" Placeholder="Search slug or URL"
+                       Style="min-width: 22rem;" />
+        <RadzenButton Text="Search" Icon="search" Click="LoadAsync" />
+    </RadzenStack>
+
+    <RadzenDataGrid Data="_links" TItem="ShortLink" AllowPaging="true" PageSize="20"
+                    IsLoading="_loading" AllowSorting="true" EmptyText="No links yet.">
+        <Columns>
+            <RadzenDataGridColumn TItem="ShortLink" Property="Id" Title="Slug" Width="150px">
+                <Template Context="link"><code>@link.Id</code></Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ShortLink" Property="TargetUrl" Title="Target">
+                <Template Context="link">
+                    <a href="@link.TargetUrl" target="_blank" rel="noopener noreferrer">@link.TargetUrl</a>
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ShortLink" Property="ClickCount" Title="Clicks" Width="90px" />
+            <RadzenDataGridColumn TItem="ShortLink" Property="CreatedAtUtc" Title="Created"
+                                  FormatString="{0:yyyy-MM-dd}" Width="120px" />
+            <RadzenDataGridColumn TItem="ShortLink" Property="ExpiresAtUtc" Title="Expires"
+                                  FormatString="{0:yyyy-MM-dd}" Width="120px" />
+            <RadzenDataGridColumn TItem="ShortLink" Title="Status" Width="110px" Sortable="false">
+                <Template Context="link">
+                    @if (link.IsDisabled)
+                    {
+                        <RadzenBadge Text="Disabled" BadgeStyle="BadgeStyle.Danger" />
+                    }
+                    else if (link.IsExpired(DateTimeOffset.UtcNow))
+                    {
+                        <RadzenBadge Text="Expired" BadgeStyle="BadgeStyle.Warning" />
+                    }
+                    else
+                    {
+                        <RadzenBadge Text="Active" BadgeStyle="BadgeStyle.Success" />
+                    }
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ShortLink" Title="" Width="150px" Sortable="false"
+                                  TextAlign="TextAlign.Right">
+                <Template Context="link">
+                    <RadzenButton Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Secondary"
+                                  Icon="@(link.IsDisabled ? "check_circle" : "block")"
+                                  Title="@(link.IsDisabled ? "Enable" : "Disable")"
+                                  Click="@(() => ToggleAsync(link))" />
+                    <RadzenButton Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Danger"
+                                  Icon="delete" Title="Delete"
+                                  Click="@(() => DeleteAsync(link))" />
+                </Template>
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
+</RadzenStack>
+
+@code {
+    private IReadOnlyList<ShortLink> _links = [];
+    private string? _search;
+    private bool _loading;
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        _loading = true;
+        _links = await LinkService.ListAsync(_search);
+        _loading = false;
+    }
+
+    private async Task ToggleAsync(ShortLink link)
+    {
+        var willDisable = !link.IsDisabled;
+        await LinkService.SetDisabledAsync(link.Id, willDisable);
+        Notifications.Notify(
+            NotificationSeverity.Success,
+            $"{(willDisable ? "Disabled" : "Enabled")} /{link.Id}"
+        );
+        await LoadAsync();
+    }
+
+    private async Task DeleteAsync(ShortLink link)
+    {
+        await LinkService.DeleteAsync(link.Id);
+        Notifications.Notify(NotificationSeverity.Info, $"Deleted /{link.Id}");
+        await LoadAsync();
+    }
+}

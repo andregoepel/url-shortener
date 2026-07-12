@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AndreGoepel.UrlShortener/AndreGoepel.UrlShortener.csproj" />
+    <Project Path="src/AndreGoepel.UrlShortener.AppHost/AndreGoepel.UrlShortener.AppHost.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AndreGoepel.UrlShortener.Tests/AndreGoepel.UrlShortener.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,111 @@
+@page "/"
+@layout PublicLayout
+@inject ShortLinkService Links
+@inject CreateRateLimiter RateLimiter
+@inject NavigationManager Nav
+
+<PageTitle>url.shortener</PageTitle>
+
+<section class="shortener">
+    <h1>Shorten a URL</h1>
+
+    @if (_created is not null)
+    {
+        var shortUrl = $"{_baseUrl}/s/{_created.Id}";
+        <div class="result">
+            <p class="result-label">Your short link</p>
+            <a class="result-url" href="@shortUrl">@shortUrl</a>
+            <img class="result-qr" src="/s/@_created.Id/qr" width="200" height="200"
+                 alt="QR code for @shortUrl" />
+            <p><a class="result-again" href="/">Shorten another</a></p>
+        </div>
+    }
+    else
+    {
+        @if (_error is not null)
+        {
+            <div class="form-error" role="alert">@_error</div>
+        }
+
+        @* EditForm auto-emits the antiforgery token in static SSR — do NOT add an explicit
+           <AntiforgeryToken /> as well, or the duplicate field is read as "token,token" and
+           rejected with "A valid antiforgery token was not provided". *@
+        <EditForm FormName="shorten" Model="Input" OnValidSubmit="SubmitAsync" method="post"
+                  class="shorten-form">
+            <label class="field">
+                <span>Destination URL</span>
+                <InputText @bind-Value="Input.Url" placeholder="https://example.com/very/long/path" />
+            </label>
+
+            <details class="options">
+                <summary>More options</summary>
+                <label class="field">
+                    <span>Custom alias</span>
+                    <InputText @bind-Value="Input.CustomAlias" placeholder="my-link" />
+                </label>
+                <label class="field">
+                    <span>Expires on</span>
+                    <InputDate @bind-Value="Input.ExpiresOn" />
+                </label>
+                <label class="field">
+                    <span>Max clicks</span>
+                    <InputNumber @bind-Value="Input.MaxClicks" placeholder="unlimited" />
+                </label>
+            </details>
+
+            <button type="submit" class="submit">Shorten</button>
+        </EditForm>
+    }
+</section>
+
+@code {
+    [CascadingParameter]
+    public HttpContext? HttpContext { get; set; }
+
+    [SupplyParameterFromForm]
+    public CreateInput Input { get; set; } = new();
+
+    private ShortLink? _created;
+    private string? _error;
+    private string _baseUrl = string.Empty;
+
+    protected override void OnInitialized() => _baseUrl = Nav.BaseUri.TrimEnd('/');
+
+    private async Task SubmitAsync()
+    {
+        var clientIp = HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+        if (!RateLimiter.TryAcquire(clientIp))
+        {
+            if (HttpContext is not null)
+            {
+                HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+            }
+
+            _error = "Too many links created from your address. Please wait a minute and try again.";
+            return;
+        }
+
+        // Treat the chosen day as expiring at the end of that day (UTC).
+        DateTimeOffset? expiresAtUtc = Input.ExpiresOn is { } day
+            ? new DateTimeOffset(day.Date.AddDays(1).AddTicks(-1), TimeSpan.Zero)
+            : null;
+
+        var result = await Links.CreateAsync(
+            Input.Url,
+            Input.CustomAlias,
+            createdByUserId: null,
+            clientIp: clientIp,
+            expiresAtUtc: expiresAtUtc,
+            maxClicks: Input.MaxClicks
+        );
+
+        if (result.Success)
+        {
+            _created = result.Link;
+        }
+        else
+        {
+            _error = result.Error;
+        }
+    }
+}
