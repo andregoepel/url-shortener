@@ -1,168 +1,138 @@
-:root {
-    --ag-bg: #0f172a;
-    --ag-panel: #1e293b;
-    --ag-text: #e2e8f0;
-    --ag-muted: #94a3b8;
-    --ag-accent: #4f46e5;
-    --ag-accent-hover: #4338ca;
-    --ag-border: #334155;
-    --ag-error: #f87171;
-}
+/* Public "shorten" page. It reuses the design system's login shell/card classes
+   (AndreGoepel.Design.Blazor: .ag-login-inner / .ag-login-brand / .ag-login-card /
+   .ag-login-head / .ag-login-sub) so it reads like the sign-in screen. The form inside the
+   card is styled to match the sign-in inputs and button. Colours/fonts come from the --ag-*
+   tokens, so both light and dark work. */
 
-/* Public shell — used only by the anonymous "shorten" page (static SSR). */
-.public-shell {
+.public-page {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     background: var(--ag-bg);
     color: var(--ag-text);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-}
-
-.public-header {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--ag-border);
-}
-
-.public-brand {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--ag-text);
-    text-decoration: none;
 }
 
 .public-main {
     flex: 1;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: flex-start;
-    padding: 3rem 1.5rem;
+    padding: 2.5rem 1rem;
 }
 
-.public-footer {
-    padding: 1rem 1.5rem;
-    border-top: 1px solid var(--ag-border);
-    color: var(--ag-muted);
-    font-size: 0.85rem;
-    display: flex;
-    gap: 1rem;
-    justify-content: space-between;
+.public-foot {
+    text-align: center;
+    padding: 1rem;
+    font-size: 12px;
+    color: var(--ag-faint);
 }
 
-.public-footer a {
+.public-foot a {
     color: var(--ag-muted);
 }
 
-.shortener {
-    width: 100%;
-    max-width: 34rem;
-    background: var(--ag-panel);
-    border: 1px solid var(--ag-border);
-    border-radius: 0.9rem;
-    padding: 2rem;
-}
-
-.shortener h1 {
-    margin-top: 0;
-    font-size: 1.5rem;
-}
+/* --- Form inside the ag-login-card, matched to the sign-in inputs/button --- */
 
 .shorten-form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 16px;
 }
 
 .field {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 6px;
 }
 
-.field span {
-    font-size: 0.85rem;
+.field > span {
+    font: 600 12.5px "Manrope", system-ui, sans-serif;
     color: var(--ag-muted);
 }
 
-.field input {
-    padding: 0.6rem 0.75rem;
-    border-radius: 0.5rem;
+.ag-login-card .field input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 42px;
+    padding: 0 12px;
     border: 1px solid var(--ag-border);
-    background: #0b1220;
+    border-radius: 6px;
+    background: var(--ag-input);
     color: var(--ag-text);
-    font-size: 1rem;
+    font: inherit;
 }
 
-.field input:focus {
-    outline: 2px solid var(--ag-accent);
+.ag-login-card .field input:focus {
+    outline: none;
     border-color: var(--ag-accent);
+    box-shadow: 0 0 0 2px var(--ag-accent-soft);
 }
 
 .options {
     border: 1px solid var(--ag-border);
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    padding: 10px 12px;
 }
 
 .options summary {
     cursor: pointer;
+    font-size: 13px;
     color: var(--ag-muted);
 }
 
 .options .field {
-    margin-top: 0.75rem;
+    margin-top: 12px;
 }
 
 .submit {
-    padding: 0.7rem 1rem;
+    height: 44px;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 6px;
     background: var(--ag-accent);
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
+    color: var(--ag-on-accent);
+    font: 600 14px "Manrope", system-ui, sans-serif;
     cursor: pointer;
 }
 
 .submit:hover {
-    background: var(--ag-accent-hover);
+    filter: brightness(0.95);
 }
 
 .form-error {
-    margin-bottom: 1rem;
-    padding: 0.7rem 0.9rem;
-    border-radius: 0.5rem;
-    background: rgba(248, 113, 113, 0.12);
-    border: 1px solid var(--ag-error);
-    color: var(--ag-error);
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: var(--ag-danger-soft);
+    border: 1px solid var(--ag-danger);
+    color: var(--ag-danger);
+    font-size: 13px;
 }
+
+/* --- Result view (short link + QR) --- */
 
 .result {
-    text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 16px;
     align-items: center;
-}
-
-.result-label {
-    color: var(--ag-muted);
-    margin: 0;
+    text-align: center;
 }
 
 .result-url {
-    font-size: 1.25rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 15px;
     font-weight: 600;
-    color: var(--ag-text);
+    color: var(--ag-accent-text);
     word-break: break-all;
 }
 
+/* QR codes are black-on-white, so keep a white plate regardless of theme. */
 .result-qr {
-    background: white;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
+    background: #fff;
+    padding: 8px;
+    border-radius: 8px;
 }
 
 .result-again {
-    color: var(--ag-accent);
+    font-size: 13px;
+    color: var(--ag-muted);
 }

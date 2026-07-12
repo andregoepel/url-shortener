@@ -1,8 +1,21 @@
-@* URL-shortener menu entries, injected into the AppFoundation management shell via
-   AppFoundationLayoutOptions.Menu. The menu now renders for all authenticated users, so the
-   admin-only Links entry is gated behind the Administrator role inside this component. *@
+@* Injected into the AppFoundation management shell sidebar via AppFoundationLayoutOptions.Menu.
+   Uses the design system's ag-nav-* classes + NavLink so it matches the foundation's own nav
+   items (Home, the Account section). The menu now renders for all authenticated users, so the
+   admin-only entry is gated behind the Administrator role. *@
 <AuthorizeView Roles="Administrator">
-    <RadzenPanelMenuItem Text="URL Shortener" Icon="link">
-        <RadzenPanelMenuItem Text="Links" Icon="list" Path="admin/links" />
-    </RadzenPanelMenuItem>
+    <div class="ag-nav-section">URL Shortener</div>
+    <nav class="ag-nav-group">
+        <NavLink class="ag-nav-item" href="admin/links">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="8" y1="6" x2="21" y2="6" />
+                <line x1="8" y1="12" x2="21" y2="12" />
+                <line x1="8" y1="18" x2="21" y2="18" />
+                <line x1="3" y1="6" x2="3.01" y2="6" />
+                <line x1="3" y1="12" x2="3.01" y2="12" />
+                <line x1="3" y1="18" x2="3.01" y2="18" />
+            </svg>
+            Links
+        </NavLink>
+    </nav>
 </AuthorizeView>

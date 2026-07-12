@@ -1,14 +1,16 @@
 @inherits LayoutComponentBase
 
-<div class="public-shell">
-    <header class="public-header">
-        <a class="public-brand" href="/">url.shortener</a>
-    </header>
+@* A plain, centred canvas for the public page — the same feel as the design system's sign-in
+   screen (LoginShell): brand + card centred on the page background, with a small footer. The
+   theme follows the system / stored preference via the design system's theme.js. A user-facing
+   theme control belongs in the shared auth chrome (tracked in app-foundation), not a bespoke
+   one here, so the public page stays consistent with the login/setup pages. *@
+<div class="public-page">
     <main class="public-main">
         @Body
     </main>
-    <footer class="public-footer">
-        <span>url.shortener © @DateTime.UtcNow.Year</span>
-        <a href="/Account/Login">Admin sign in</a>
+
+    <footer class="public-foot">
+        url.shortener © @DateTime.UtcNow.Year · <a href="/Account/Login">Admin sign in</a>
     </footer>
 </div>

@@ -15,17 +15,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="@NavigationManager.BaseUri" />
+
+    @* Design system (AndreGoepel.Design.Blazor): self-hosted fonts, Radzen base, then the
+       token/reskin layer. Order per its README (fonts → material-base → design). design.css
+       remaps Radzen's --rz-* variables onto the --ag-* tokens, so no <RadzenTheme> is used. *@
+    <link rel="stylesheet" href="_content/AndreGoepel.Design.Blazor/css/fonts.css" />
     <link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css" />
+    <link rel="stylesheet" href="_content/AndreGoepel.Design.Blazor/css/design.css" />
     <link rel="stylesheet" href="_content/AndreGoepel.AppFoundation/app.css" />
     <link rel="stylesheet" href="@Assets["app.css"]" />
     <link rel="stylesheet" href="@Assets["AndreGoepel.UrlShortener.styles.css"]" />
+
+    @* Self-initialising: resolves the stored/system preference and sets data-theme on <html>
+       before the first paint, so there is no theme flash. *@
+    <script src="_content/AndreGoepel.Design.Blazor/js/theme.js"></script>
+
     @if (isPublic)
     {
         <HeadOutlet />
     }
     else
     {
-        <RadzenTheme Theme="material" @rendermode="InteractiveServer" />
         <HeadOutlet @rendermode="InteractiveServer" />
     }
 </head>
@@ -40,6 +50,7 @@
         <Routes @rendermode="InteractiveServer" />
         <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
     }
+    <script src="_content/AndreGoepel.Design.Blazor/js/nav.js"></script>
     <script src="_framework/blazor.web.js"></script>
 </body>
 

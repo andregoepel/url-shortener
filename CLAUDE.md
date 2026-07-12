@@ -97,6 +97,16 @@ Orchestrated via .NET Aspire. See `README.md` for the route/feature overview.
   `[SupplyParameterFromForm]`.
 - Implement `IDisposable` / `IAsyncDisposable` on components that subscribe to events; unsubscribe in `Dispose()`.
 
+### Design system
+- UI is themed by **`AndreGoepel.Design.Blazor`** (a transitive dependency of AppFoundation):
+  emerald light/dark tokens + a Radzen reskin + self-hosted fonts (Manrope / Space Grotesk /
+  JetBrains Mono). `App.razor` loads `fonts.css` → Radzen `material-base.css` → `design.css`
+  (in that order) plus `theme.js` (self-initialising, no-flash) and `nav.js`. No `<RadzenTheme>` —
+  `design.css` remaps Radzen's `--rz-*` onto the `--ag-*` tokens.
+- Style with the `--ag-*` tokens (`--ag-bg`, `--ag-surface`, `--ag-text`, `--ag-muted`,
+  `--ag-border`, `--ag-accent`, `--ag-on-accent`, `--ag-danger`, …) so both themes work. Light/dark
+  is driven by `data-theme` on `<html>`; toggle via `window.agTheme.set('light'|'dark'|'auto')`.
+
 ## Domain Notes (url-shortener-specific)
 - **Identity defaults:** no self-service account creation — `ConfigureIdentity` sets
   `EnableUserRegistration = false` (explicit baseline). The first administrator is created via
