@@ -16,8 +16,11 @@
         <RadzenButton Text="Search" Icon="search" Click="LoadAsync" />
     </RadzenStack>
 
+    @* AllowAlternatingRows=false: the design system themes the grid background + hover but not
+       Radzen's zebra stripe, which would otherwise fall back to a white row on the dark theme. *@
     <RadzenDataGrid Data="_links" TItem="ShortLink" AllowPaging="true" PageSize="20"
-                    IsLoading="_loading" AllowSorting="true" EmptyText="No links yet.">
+                    AllowAlternatingRows="false" IsLoading="_loading" AllowSorting="true"
+                    EmptyText="No links yet.">
         <Columns>
             <RadzenDataGridColumn TItem="ShortLink" Property="Id" Title="Slug" Width="150px">
                 <Template Context="link"><code>@link.Id</code></Template>
