@@ -98,6 +98,15 @@
     filter: brightness(0.95);
 }
 
+.form-notice {
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: var(--ag-surface);
+    border: 1px solid var(--ag-border);
+    color: var(--ag-muted);
+    font-size: 13px;
+}
+
 .form-error {
     padding: 10px 12px;
     border-radius: 6px;

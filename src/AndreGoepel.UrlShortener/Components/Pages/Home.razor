@@ -1,6 +1,7 @@
 @page "/"
 @layout PublicLayout
 @inject ShortLinkService Links
+@inject ShortenerFeatureService Features
 @inject CreateRateLimiter RateLimiter
 @inject NavigationManager Nav
 
@@ -26,6 +27,16 @@
                 <img class="result-qr" src="/s/@_created.Id/qr" width="180" height="180"
                      alt="QR code for @shortUrl" />
                 <a class="result-again" href="/">Shorten another</a>
+            </div>
+        }
+        else if (!_publicCreationEnabled)
+        {
+            <div class="ag-login-head">
+                <h1>Shorten a URL</h1>
+                <p class="ag-login-sub">Creating new links is paused.</p>
+            </div>
+            <div class="form-notice" role="status">
+                Public creation is currently disabled. Existing short links keep working.
             </div>
         }
         else
@@ -82,8 +93,13 @@
     private ShortLink? _created;
     private string? _error;
     private string _baseUrl = string.Empty;
+    private bool _publicCreationEnabled = true;
 
-    protected override void OnInitialized() => _baseUrl = Nav.BaseUri.TrimEnd('/');
+    protected override async Task OnInitializedAsync()
+    {
+        _baseUrl = Nav.BaseUri.TrimEnd('/');
+        _publicCreationEnabled = await Features.IsPublicCreationEnabledAsync();
+    }
 
     private async Task SubmitAsync()
     {

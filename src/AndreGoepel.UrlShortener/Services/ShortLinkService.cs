@@ -14,7 +14,8 @@ namespace AndreGoepel.UrlShortener.Services;
 public sealed partial class ShortLinkService(
     IDocumentStore store,
     SlugGenerator slugs,
-    UrlValidator urlValidator
+    UrlValidator urlValidator,
+    ShortenerFeatureService features
 )
 {
     // Slugs that must never be handed out as links because they collide with real app routes.
@@ -51,6 +52,15 @@ public sealed partial class ShortLinkService(
         CancellationToken ct = default
     )
     {
+        // The global kill switch gates only anonymous creation — a signed-in creator passes.
+        if (
+            string.IsNullOrEmpty(createdByUserId)
+            && !await features.IsPublicCreationEnabledAsync(ct)
+        )
+        {
+            return CreateResult.Fail("Public creation is currently disabled.");
+        }
+
         if (!urlValidator.TryValidate(url, out var target, out var urlError))
         {
             return CreateResult.Fail(urlError!);
