@@ -1,0 +1,60 @@
+@page "/admin/shortener-settings"
+@rendermode InteractiveServer
+
+@attribute [Authorize(Roles = "Administrator")]
+@using AndreGoepel.Design.Blazor.Components
+@inject ShortenerFeatureService Features
+@inject NotificationService Notifications
+
+<PageTitle>Settings – url.shortener</PageTitle>
+
+<RadzenStack Gap="1rem" class="rz-p-4">
+    <RadzenText TextStyle="TextStyle.H3" TagName="TagName.H1">Shortener settings</RadzenText>
+
+    <CardForm TItem="InputModel" Data="_input" Submit="SaveAsync" IsBusy="_saving">
+        <SettingToggleRow Label="Public link creation"
+                          Description="Allow anonymous visitors to create short links on the public page. When off, creation is rejected and the public form is hidden; existing links, redirects and QR codes keep working."
+                          @bind-Value="_input.AllowPublicCreation" />
+    </CardForm>
+</RadzenStack>
+
+@code {
+    private InputModel _input = new();
+    private bool _saving;
+
+    protected override async Task OnInitializedAsync() =>
+        _input = new InputModel
+        {
+            AllowPublicCreation = await Features.IsPublicCreationEnabledAsync(),
+        };
+
+    private async Task SaveAsync()
+    {
+        _saving = true;
+
+        try
+        {
+            await Features.SetPublicCreationEnabledAsync(_input.AllowPublicCreation);
+            Notifications.Notify(
+                NotificationSeverity.Success,
+                "Settings saved",
+                _input.AllowPublicCreation
+                    ? "Public link creation is enabled."
+                    : "Public link creation is disabled."
+            );
+        }
+        catch (Exception ex)
+        {
+            Notifications.Notify(NotificationSeverity.Error, "Error saving settings", ex.Message);
+        }
+        finally
+        {
+            _saving = false;
+        }
+    }
+
+    private sealed class InputModel
+    {
+        public bool AllowPublicCreation { get; set; } = true;
+    }
+}

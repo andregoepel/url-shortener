@@ -1,4 +1,7 @@
+using AndreGoepel.Marten.Configuration;
+using AndreGoepel.UrlShortener.Models;
 using AndreGoepel.UrlShortener.Services;
+using Marten;
 
 namespace AndreGoepel.UrlShortener;
 
@@ -16,6 +19,12 @@ public static class Initialization
         services.AddSingleton<QrCodeService>();
         // A process-wide, IP-partitioned limiter guarding anonymous public link creation.
         services.AddSingleton<CreateRateLimiter>();
+
+        // Admin-toggleable feature flags (public-creation kill switch), persisted via the
+        // foundation's settings store. The document joins the shared settings table the same
+        // way the foundation registers its own settings types.
+        services.AddSingleton<ShortenerFeatureService>();
+        services.ConfigureMarten(marten => marten.AddSettingsDocument<ShortenerFeatureSettings>());
         return services;
     }
 }
