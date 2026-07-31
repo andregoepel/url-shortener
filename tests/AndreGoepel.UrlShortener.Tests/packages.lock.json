@@ -4,14 +4,15 @@
     "net10.0": {
       "AndreGoepel.AppFoundation": {
         "type": "Direct",
-        "requested": "[1.8.0, )",
-        "resolved": "1.8.0",
-        "contentHash": "O5/qZmgI3pJH6YlruJk2dUSPZj0tinWj61hUwQflIPX3hlyqpCnY4yC5AZcSz7jGvTB5XMPj2+vMO2YuUnDPaQ==",
+        "requested": "[1.10.0, )",
+        "resolved": "1.10.0",
+        "contentHash": "7YTd5Kfq//BNz5RegJllU/trnJpJndNDL0Pa+C3rOr8ZmmruTYShC9MteNmEttSSnWFHE2sbVCrylcBhIAACCg==",
         "dependencies": {
-          "AndreGoepel.AppFoundation.Core": "1.8.0",
-          "AndreGoepel.AppFoundation.MailService": "1.8.0",
-          "AndreGoepel.Design.Blazor": "1.4.2",
-          "AndreGoepel.Marten.Configuration": "1.0.1",
+          "AndreGoepel.AppFoundation.Core": "1.10.0",
+          "AndreGoepel.AppFoundation.MailService": "1.10.0",
+          "AndreGoepel.Core": "1.0.0",
+          "AndreGoepel.Design.Blazor": "1.6.0",
+          "AndreGoepel.Marten.Configuration": "1.1.0",
           "AndreGoepel.Marten.Identity.Blazor": "1.8.0",
           "MailKit": "4.17.0",
           "Marten": "9.19.0",
@@ -24,16 +25,17 @@
       },
       "AndreGoepel.AppFoundation.Hosting": {
         "type": "Direct",
-        "requested": "[1.8.0, )",
-        "resolved": "1.8.0",
-        "contentHash": "zWp8HGkGel1cwGbCvl3y6d2mpNI+Z/zLCoFy/7DXk7/JozfQeIRGYGkJblvHhj0XCjpDwbcfbZKKrETM7SdcjQ==",
+        "requested": "[1.10.0, )",
+        "resolved": "1.10.0",
+        "contentHash": "TmBVxOVF0f4C3+CZZipol9ym44F+iv6aXDPgsxl1Z2oQ83EDy/y9AwQJ+tpguyG5Lu/8p9WcKBhQN3iUZp55yQ==",
         "dependencies": {
-          "AndreGoepel.AppFoundation": "1.8.0",
-          "AndreGoepel.AppFoundation.Core": "1.8.0",
-          "AndreGoepel.AppFoundation.MailService": "1.8.0",
-          "AndreGoepel.AppFoundation.ServiceDefaults": "1.8.0",
-          "AndreGoepel.Design.Blazor": "1.4.2",
-          "AndreGoepel.Marten.Configuration": "1.0.1",
+          "AndreGoepel.AppFoundation": "1.10.0",
+          "AndreGoepel.AppFoundation.Core": "1.10.0",
+          "AndreGoepel.AppFoundation.MailService": "1.10.0",
+          "AndreGoepel.AppFoundation.ServiceDefaults": "1.10.0",
+          "AndreGoepel.Core": "1.0.0",
+          "AndreGoepel.Design.Blazor": "1.6.0",
+          "AndreGoepel.Marten.Configuration": "1.1.0",
           "AndreGoepel.Marten.Identity.Blazor": "1.8.0",
           "MailKit": "4.17.0",
           "Marten": "9.19.0",
@@ -87,15 +89,16 @@
       },
       "AndreGoepel.AppFoundation.Core": {
         "type": "Transitive",
-        "resolved": "1.8.0",
-        "contentHash": "QXF0XhKCsj4lR+rRvPw9PGiicsebXZGGpQDTHVmNKCQspYjKPYGF2+ULat5ocxpPeJxhwuI1nsmbWFscquHCjw=="
+        "resolved": "1.10.0",
+        "contentHash": "nF0I3nzOo629l24lEorAHTw3sx1zDA+BP4LMZBD3okamXJokoywt1AtUEMLDEMaLguMZxaBdhPFTUoWdOUTeVw=="
       },
       "AndreGoepel.AppFoundation.MailService": {
         "type": "Transitive",
-        "resolved": "1.8.0",
-        "contentHash": "OHaSdAtSEQnLP57M4z3zvh+oOl/8gbI8VzOC8mtv4ECOfcq7C1KckCEPZp+Xt8DOHB1kO8rofge0ZFh4or5YsQ==",
+        "resolved": "1.10.0",
+        "contentHash": "7A07wg2zW6xuCMuUpezm7d2QP5NOoeUGhv9Y62Mr4qMqB1cGtx+lMzgMbY4dL15OIVhEYmbKLC7h+KQPTbU/nA==",
         "dependencies": {
-          "AndreGoepel.Marten.Configuration": "1.0.1",
+          "AndreGoepel.Core": "1.0.0",
+          "AndreGoepel.Marten.Configuration": "1.1.0",
           "MailKit": "4.17.0",
           "Marten": "9.19.0",
           "Npgsql": "9.0.4",
@@ -104,8 +107,8 @@
       },
       "AndreGoepel.AppFoundation.ServiceDefaults": {
         "type": "Transitive",
-        "resolved": "1.8.0",
-        "contentHash": "phOOemrSSMxnBXKyHz2WEgDeS+kDSjpVvXqgAUhIphIOUZGRslx5T/ntJGilMNK6pfjcKa5Ao5Jl/s+FO3cu2Q==",
+        "resolved": "1.10.0",
+        "contentHash": "fRuJlcoD74cNy1cBXaS29QVBSzSno5w2ZfpXVeOYJMjWx4eZtom37B1b9nZ6UPwyxuPecaXeMg696Qr+nTkw5Q==",
         "dependencies": {
           "Microsoft.Extensions.Http.Resilience": "10.8.0",
           "Microsoft.Extensions.ServiceDiscovery": "10.8.0",
@@ -116,20 +119,26 @@
           "OpenTelemetry.Instrumentation.Runtime": "1.17.0"
         }
       },
+      "AndreGoepel.Core": {
+        "type": "Transitive",
+        "resolved": "1.0.0",
+        "contentHash": "omZn+BlovLo8HdsK9Yak/SyvD6a7s5KvoEBGgzUpNtmUpxCyEuffaydIhmvxwqIcfn7KGZsMbMJ31MVoxcC+yQ=="
+      },
       "AndreGoepel.Design.Blazor": {
         "type": "Transitive",
-        "resolved": "1.4.2",
-        "contentHash": "57laKLfocolPOcRbBLP0GccM9k3T+grGAnlv/BpUmH9n1SnbxAqq6YEotTq5E9xThMq9WvuSGv/VUTB1B6Bdww==",
+        "resolved": "1.6.0",
+        "contentHash": "ciJLnfD2c8mXk/WMPlybrwEhWnpsA8IGTrNAzo+5mRLAy0k7MQFWNPrTOlW536BYAhb0Ri3INseVBQfV8fX8ww==",
         "dependencies": {
           "Radzen.Blazor": "11.1.7"
         }
       },
       "AndreGoepel.Marten.Configuration": {
         "type": "Transitive",
-        "resolved": "1.0.1",
-        "contentHash": "K/lZ0YfJ6+9u851HX1o89Y8TPNVwBd8SSqzh9KIWLgYf3/j6w2yL7RTBtAKlPUtTyTTIf2Vuh+Jsz1hREEEyOw==",
+        "resolved": "1.1.0",
+        "contentHash": "oz/8HU0TJ5efluVfz5d17BESg03G46DqYhuM0GXTuSNgeqxr/k7OYvJZl2pbw4IT8ffuDLj7Mwgo8xjiWJdyZA==",
         "dependencies": {
           "Marten": "9.19.0",
+          "Microsoft.AspNetCore.DataProtection.Abstractions": "10.0.10",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.10"
         }
       },
@@ -291,6 +300,11 @@
           "Microsoft.Extensions.Primitives": "10.0.10",
           "Microsoft.JSInterop": "10.0.10"
         }
+      },
+      "Microsoft.AspNetCore.DataProtection.Abstractions": {
+        "type": "Transitive",
+        "resolved": "10.0.10",
+        "contentHash": "q2RNx0N/qrsU+JgbPE78I9pu5ekwguitAFVoeE1NCgxtkUTguvf7oTzBnn42zSQxuugJ4fmj0RSarob8Rvorrg=="
       },
       "Microsoft.AspNetCore.HeaderPropagation": {
         "type": "Transitive",
@@ -1354,8 +1368,8 @@
       "andregoepel.urlshortener": {
         "type": "Project",
         "dependencies": {
-          "AndreGoepel.AppFoundation": "[1.8.0, )",
-          "AndreGoepel.AppFoundation.Hosting": "[1.8.0, )",
+          "AndreGoepel.AppFoundation": "[1.10.0, )",
+          "AndreGoepel.AppFoundation.Hosting": "[1.10.0, )",
           "AndreGoepel.Marten.Identity.Blazor": "[1.8.1, )",
           "Marten": "[9.19.0, )",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "[1.23.0, )",
