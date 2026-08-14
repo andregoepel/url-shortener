@@ -88,12 +88,17 @@
     public HttpContext? HttpContext { get; set; }
 
     [SupplyParameterFromForm]
-    public CreateInput Input { get; set; } = new();
+    public CreateInput Input { get; set; } = null!;
 
     private ShortLink? _created;
     private string? _error;
     private string _baseUrl = string.Empty;
     private bool _publicCreationEnabled = true;
+
+    protected override void OnInitialized()
+    {
+        Input ??= new();
+    }
 
     protected override async Task OnInitializedAsync()
     {
