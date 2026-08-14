@@ -4,9 +4,9 @@
   </PropertyGroup>
 
   <ItemGroup Label="AndreGoepel">
-    <PackageVersion Include="AndreGoepel.AppFoundation" Version="1.10.0" />
-    <PackageVersion Include="AndreGoepel.AppFoundation.Hosting" Version="1.10.0" />
-    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="1.9.0" />
+    <PackageVersion Include="AndreGoepel.AppFoundation" Version="1.11.0" />
+    <PackageVersion Include="AndreGoepel.AppFoundation.Hosting" Version="1.11.0" />
+    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="1.9.3" />
   </ItemGroup>
 
   <ItemGroup Label="Aspire">
@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup Label="Libraries">
-    <PackageVersion Include="Marten" Version="9.22.0" />
-    <PackageVersion Include="Radzen.Blazor" Version="11.2.0" />
+    <PackageVersion Include="Marten" Version="9.23.0" />
+    <PackageVersion Include="Radzen.Blazor" Version="11.2.4" />
     <PackageVersion Include="QRCoder" Version="1.8.0" />
     <PackageVersion
       Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets"
