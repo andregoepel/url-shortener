@@ -74,12 +74,12 @@
       },
       "Marten": {
         "type": "Direct",
-        "requested": "[9.23.0, )",
-        "resolved": "9.23.0",
-        "contentHash": "iUYefWBjDi+5+ryfTwH82o8lE1UpJbJrWknwgTHj8rRH5HSsg8fDsch96ei4oFhK8r269WFepRac8qU2GqZGRg==",
+        "requested": "[9.24.0, )",
+        "resolved": "9.24.0",
+        "contentHash": "CLoOv/uAyLpjpYG/n99VxxzfVMCRZDMgaPOkg32HMZ6Sg1LTPYZslSPqSVPSnwzRMWg+VrwBAGus/vYBejNJVg==",
         "dependencies": {
-          "JasperFx": "2.47.0",
-          "JasperFx.Events": "2.47.0",
+          "JasperFx": "2.48.0",
+          "JasperFx.Events": "2.48.0",
           "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
           "Weasel.Postgresql": "9.24.0",
           "Weasel.Storage": "9.24.0"
@@ -108,9 +108,9 @@
       },
       "Radzen.Blazor": {
         "type": "Direct",
-        "requested": "[11.2.4, )",
-        "resolved": "11.2.4",
-        "contentHash": "WrAMmcxeNOA+xsmVxjM3b6pONKQNDwBYx13Hp8AR4Hy1gruJgAJYQbVSJ3C0g9gIzOPxFS6sLgAZRoYF6rYw1A=="
+        "requested": "[11.2.5, )",
+        "resolved": "11.2.5",
+        "contentHash": "AGTCEn3q7AbPuTAnm9QkPV4r+EycyL0g7nGZNOTH0JJxugeYWYI5s6WspGoK+/HahR1SWA1GXeZ7YDdDJnyflQ=="
       },
       "AndreGoepel.AppFoundation.Core": {
         "type": "Transitive",
@@ -219,8 +219,8 @@
       },
       "JasperFx": {
         "type": "Transitive",
-        "resolved": "2.47.0",
-        "contentHash": "8auKsW7nrJKABmfuwcA/m+RHpOBkkxVJcTmDnpWbpU4z6fPAaqqDDTqC9zSq0G54zZvwiLvaldNCvPHztl9SaQ==",
+        "resolved": "2.48.0",
+        "contentHash": "0D/PBYy2+UV0MXkJzey3roddLSSu/xJ+i5GVsom0zhvTBbIXMRc0CJGZYDDcUnVjOj0MizoXIkcv+8nYT2/e/g==",
         "dependencies": {
           "FastExpressionCompiler": "5.4.1",
           "ImTools": "4.0.0",
@@ -231,10 +231,10 @@
       },
       "JasperFx.Events": {
         "type": "Transitive",
-        "resolved": "2.47.0",
-        "contentHash": "nxm4V85q7YKeb8RtdgbAXr09jFpdm5MzeDPxo49EVt/glupEUw/W11+BxRgS+LLA+dDOGghrLbFV1gc55vbfyQ==",
+        "resolved": "2.48.0",
+        "contentHash": "wkAL6kzqHzMK4S9rnruDes45+eDeMyLg4UOMjBu6xPAkufOfflWonTW+fA43D9uCcPVyF0CZ9rr2E5ss1oXZuA==",
         "dependencies": {
-          "JasperFx": "2.47.0"
+          "JasperFx": "2.48.0"
         }
       },
       "JasperFx.RuntimeCompiler": {
