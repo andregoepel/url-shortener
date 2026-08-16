@@ -1375,7 +1375,7 @@
           "Marten": "[9.24.0, )",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "[1.23.0, )",
           "QRCoder": "[1.8.0, )",
-          "Radzen.Blazor": "[11.2.4, )"
+          "Radzen.Blazor": "[11.2.5, )"
         }
       },
       "AndreGoepel.Marten.Identity.Blazor": {
@@ -1425,9 +1425,9 @@
       },
       "Radzen.Blazor": {
         "type": "CentralTransitive",
-        "requested": "[11.2.4, )",
-        "resolved": "11.2.4",
-        "contentHash": "WrAMmcxeNOA+xsmVxjM3b6pONKQNDwBYx13Hp8AR4Hy1gruJgAJYQbVSJ3C0g9gIzOPxFS6sLgAZRoYF6rYw1A==",
+        "requested": "[11.2.5, )",
+        "resolved": "11.2.5",
+        "contentHash": "AGTCEn3q7AbPuTAnm9QkPV4r+EycyL0g7nGZNOTH0JJxugeYWYI5s6WspGoK+/HahR1SWA1GXeZ7YDdDJnyflQ==",
         "dependencies": {
           "Microsoft.AspNetCore.Components": "10.0.11",
           "Microsoft.AspNetCore.Components.Web": "10.0.11"
