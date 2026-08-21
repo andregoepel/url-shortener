@@ -4,19 +4,19 @@
   </PropertyGroup>
 
   <ItemGroup Label="AndreGoepel">
-    <PackageVersion Include="AndreGoepel.AppFoundation" Version="1.11.0" />
-    <PackageVersion Include="AndreGoepel.AppFoundation.Hosting" Version="1.11.0" />
-    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="1.9.3" />
+    <PackageVersion Include="AndreGoepel.AppFoundation" Version="2.0.0" />
+    <PackageVersion Include="AndreGoepel.AppFoundation.Hosting" Version="2.0.0" />
+    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup Label="Aspire">
-    <PackageVersion Include="Aspire.Hosting.Docker" Version="13.3.5" />
-    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.3.5" />
+    <PackageVersion Include="Aspire.Hosting.Docker" Version="13.5.1" />
+    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.5.1" />
   </ItemGroup>
 
   <ItemGroup Label="Libraries">
-    <PackageVersion Include="Marten" Version="9.23.0" />
-    <PackageVersion Include="Radzen.Blazor" Version="11.2.4" />
+    <PackageVersion Include="Marten" Version="9.29.0" />
+    <PackageVersion Include="Radzen.Blazor" Version="11.2.6" />
     <PackageVersion Include="QRCoder" Version="1.8.0" />
     <PackageVersion
       Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets"
@@ -26,8 +26,8 @@
 
   <ItemGroup Label="Testing">
     <PackageVersion Include="coverlet.collector" Version="10.0.1" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
-    <PackageVersion Include="xunit.v3" Version="3.2.2" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
+    <PackageVersion Include="xunit.v3" Version="4.0.0" />
   </ItemGroup>
 </Project>
