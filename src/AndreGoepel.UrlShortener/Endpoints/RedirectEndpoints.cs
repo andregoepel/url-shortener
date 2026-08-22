@@ -60,10 +60,16 @@ public static class RedirectEndpoints
                 CancellationToken ct
             ) =>
             {
+                // Mirrors the redirect's availability check (#31): a QR code for a link that
+                // can no longer be followed would just point print material at a dead link.
                 var link = await links.ResolveAsync(slug, ct);
-                if (link is null)
+                if (link is null || link.IsDisabled || link.IsExpired(DateTimeOffset.UtcNow))
                 {
-                    return Results.NotFound();
+                    return Results.Content(
+                        GonePage,
+                        "text/html",
+                        statusCode: StatusCodes.Status410Gone
+                    );
                 }
 
                 var shortUrl = $"{http.Request.Scheme}://{http.Request.Host}/s/{slug}";
