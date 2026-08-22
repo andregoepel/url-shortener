@@ -44,4 +44,16 @@ while `/` stays open for anonymous shortening.
 dotnet test
 ```
 
-Unit tests cover URL validation (scheme / private-IP / length), slug generation, and expiry.
+Two suites, both run by the command above:
+
+- `AndreGoepel.UrlShortener.Tests` — pure unit tests: URL validation (scheme / private-IP /
+  length), slug generation, and expiry. No I/O, no Docker.
+- `AndreGoepel.UrlShortener.IntegrationTests` — `WebApplicationFactory` + a real Postgres
+  container (Testcontainers). Covers everything anonymous and HTTP-shaped: the public create
+  form (including the antiforgery regression guard — see `PublicCreateFlow.Tests.cs`), the
+  guardrails, the rate limiter, `/s/{slug}` redirect + click recording, and `/s/{slug}/qr`.
+  Needs Docker/Podman running.
+
+Anything that needs a live Blazor circuit (the InteractiveServer `/admin/links` grid) belongs in
+a future Aspire + Playwright E2E project instead — HTTP-shaped assertions go in
+`IntegrationTests`, live-circuit assertions go in `E2ETests`.

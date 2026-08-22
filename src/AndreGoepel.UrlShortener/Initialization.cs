@@ -18,6 +18,7 @@ public static class Initialization
         services.AddSingleton<UrlValidator>();
         services.AddSingleton<QrCodeService>();
         // A process-wide, IP-partitioned limiter guarding anonymous public link creation.
+        services.AddOptions<CreateRateLimiterOptions>().BindConfiguration("Shortener:RateLimit");
         services.AddSingleton<CreateRateLimiter>();
 
         // Admin-toggleable feature flags (public-creation kill switch), persisted via the
