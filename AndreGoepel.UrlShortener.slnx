@@ -6,5 +6,6 @@
   <Folder Name="/tests/">
     <Project Path="tests/AndreGoepel.UrlShortener.Tests/AndreGoepel.UrlShortener.Tests.csproj" />
     <Project Path="tests/AndreGoepel.UrlShortener.IntegrationTests/AndreGoepel.UrlShortener.IntegrationTests.csproj" />
+    <Project Path="tests/AndreGoepel.UrlShortener.E2ETests/AndreGoepel.UrlShortener.E2ETests.csproj" />
   </Folder>
 </Solution>

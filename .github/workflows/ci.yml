@@ -16,3 +16,5 @@ jobs:
         tests/AndreGoepel.UrlShortener.Tests/AndreGoepel.UrlShortener.Tests.csproj
         tests/AndreGoepel.UrlShortener.IntegrationTests/AndreGoepel.UrlShortener.IntegrationTests.csproj
       apphost-project: src/AndreGoepel.UrlShortener.AppHost/AndreGoepel.UrlShortener.AppHost.csproj
+      e2e-project: tests/AndreGoepel.UrlShortener.E2ETests/AndreGoepel.UrlShortener.E2ETests.csproj
+      test-filter: "FullyQualifiedName!~E2ETests"
