@@ -16,6 +16,8 @@ Orchestrated via .NET Aspire. See `README.md` for the route/feature overview.
 - `AndreGoepel.UrlShortener` — Blazor host: public create page, admin area, redirect endpoints
 - `AndreGoepel.UrlShortener.AppHost` — .NET Aspire host (Postgres + MailHog)
 - `AndreGoepel.UrlShortener.Tests` — xUnit v3 unit tests
+- `AndreGoepel.UrlShortener.IntegrationTests` — `WebApplicationFactory` + Testcontainers
+  Postgres; everything anonymous and HTTP-shaped (see Testing below)
 
 ## Tech Stack
 - .NET 10, Blazor (static SSR public page + InteractiveServer admin), .NET Aspire
@@ -123,8 +125,23 @@ Orchestrated via .NET Aspire. See `README.md` for the route/feature overview.
   (non-enumerable), a reserved-alias list, and an admin kill switch (`ShortLink.IsDisabled`).
 
 ## Testing
-- Scope: domain logic (URL validation, slug generation, expiry evaluation).
+- Three suites, split by what they need to drive: **`.Tests`** — pure domain logic (URL
+  validation, slug generation, expiry evaluation), no I/O. **`.IntegrationTests`** —
+  `WebApplicationFactory<Program>` + a real Postgres container; HTTP-shaped assertions
+  (status codes, response bodies, antiforgery, the rate limiter, Wolverine's click-recording
+  drain via `Wolverine.Tracking`). **A future `.E2ETests`** (Aspire + Playwright, on
+  `AndreGoepel.Testing.E2E`) — anything that needs a live Blazor circuit, i.e. the
+  InteractiveServer `/admin/links` grid. When adding a test, put it in `.IntegrationTests`
+  unless it genuinely cannot be expressed without a real browser.
 - Naming: `[Method]_[Scenario]_[ExpectedResult]`.
-- Files: `[Subject]Tests.cs`; the class name stays `[Subject]Tests`.
+- Files: `[Subject]Tests.cs` (or `[Subject].Tests.cs` in `.IntegrationTests`, matching that
+  project's existing files); the class name stays `[Subject]Tests`.
 - Every test uses `// Arrange`, `// Act`, `// Assert` comments (combine as `// Arrange / Act`
   when inseparable; omit `// Arrange` when there is no setup).
+- `.IntegrationTests` shares one Postgres container + one booted app across the whole
+  collection (`IntegrationCollection`/`UrlShortenerAppFixture`) and resets link/click
+  documents between tests rather than paying the schema-rebuild cost per test. A test that
+  needs a non-default create-rate-limit permit count constructs its own dedicated
+  `UrlShortenerAppFixture(permitLimit)` instance instead of reconfiguring the shared one via
+  `WithWebHostBuilder` — that interacts badly with the fixture's `CreateHost` override and
+  can tear down the shared host out from under other tests.

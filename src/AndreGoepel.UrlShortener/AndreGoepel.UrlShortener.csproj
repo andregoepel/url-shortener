@@ -17,4 +17,9 @@
     <PackageReference Include="AndreGoepel.AppFoundation" />
     <PackageReference Include="AndreGoepel.AppFoundation.Hosting" />
   </ItemGroup>
+
+  <ItemGroup>
+    <!-- WebApplicationFactory<Program> needs the compiler-generated (internal) Program class. -->
+    <InternalsVisibleTo Include="AndreGoepel.UrlShortener.IntegrationTests" />
+  </ItemGroup>
 </Project>
