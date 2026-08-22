@@ -18,6 +18,8 @@ Orchestrated via .NET Aspire. See `README.md` for the route/feature overview.
 - `AndreGoepel.UrlShortener.Tests` — xUnit v3 unit tests
 - `AndreGoepel.UrlShortener.IntegrationTests` — `WebApplicationFactory` + Testcontainers
   Postgres; everything anonymous and HTTP-shaped (see Testing below)
+- `AndreGoepel.UrlShortener.E2ETests` — Aspire + Playwright against the real AppHost; anything
+  needing a live Blazor circuit (see Testing below)
 
 ## Tech Stack
 - .NET 10, Blazor (static SSR public page + InteractiveServer admin), .NET Aspire
@@ -129,9 +131,10 @@ Orchestrated via .NET Aspire. See `README.md` for the route/feature overview.
   validation, slug generation, expiry evaluation), no I/O. **`.IntegrationTests`** —
   `WebApplicationFactory<Program>` + a real Postgres container; HTTP-shaped assertions
   (status codes, response bodies, antiforgery, the rate limiter, Wolverine's click-recording
-  drain via `Wolverine.Tracking`). **A future `.E2ETests`** (Aspire + Playwright, on
+  drain via `Wolverine.Tracking`). **`.E2ETests`** (Aspire + Playwright, on
   `AndreGoepel.Testing.E2E`) — anything that needs a live Blazor circuit, i.e. the
-  InteractiveServer `/admin/links` grid. When adding a test, put it in `.IntegrationTests`
+  InteractiveServer `/admin/links` grid (disable/enable/delete are C# event handlers over a
+  SignalR circuit with no REST surface). When adding a test, put it in `.IntegrationTests`
   unless it genuinely cannot be expressed without a real browser.
 - Naming: `[Method]_[Scenario]_[ExpectedResult]`.
 - Files: `[Subject]Tests.cs` (or `[Subject].Tests.cs` in `.IntegrationTests`, matching that
@@ -145,3 +148,7 @@ Orchestrated via .NET Aspire. See `README.md` for the route/feature overview.
   `UrlShortenerAppFixture(permitLimit)` instance instead of reconfiguring the shared one via
   `WithWebHostBuilder` — that interacts badly with the fixture's `CreateHost` override and
   can tear down the shared host out from under other tests.
+- `.E2ETests` boots the real AppHost (`Aspire.Hosting.Testing`) with `E2E=true` once per
+  collection and shares a single Chromium browser; each test gets its own `IBrowserContext`.
+  Redirect targets must be real, public-looking URLs (`UrlValidator` rejects `localhost`), so
+  those tests assert only that the browser left the app origin, never on the target's content.

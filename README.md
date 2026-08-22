@@ -44,7 +44,8 @@ while `/` stays open for anonymous shortening.
 dotnet test
 ```
 
-Two suites, both run by the command above:
+Three suites; the first two run by the command above, the third needs its own invocation (see
+below):
 
 - `AndreGoepel.UrlShortener.Tests` — pure unit tests: URL validation (scheme / private-IP /
   length), slug generation, and expiry. No I/O, no Docker.
@@ -53,7 +54,12 @@ Two suites, both run by the command above:
   form (including the antiforgery regression guard — see `PublicCreateFlow.Tests.cs`), the
   guardrails, the rate limiter, `/s/{slug}` redirect + click recording, and `/s/{slug}/qr`.
   Needs Docker/Podman running.
+- `AndreGoepel.UrlShortener.E2ETests` — Aspire + Playwright (Chromium) against the real AppHost.
+  Covers the InteractiveServer `/admin/links` grid (disable/enable/delete over a SignalR
+  circuit — no REST surface, so only a real browser can drive it) plus a browser-level smoke of
+  the public create flow. Needs Docker/Podman and, once, `playwright.ps1 install chromium`; run
+  separately: `dotnet test tests/AndreGoepel.UrlShortener.E2ETests`. See that project's own
+  `README.md` for details.
 
-Anything that needs a live Blazor circuit (the InteractiveServer `/admin/links` grid) belongs in
-a future Aspire + Playwright E2E project instead — HTTP-shaped assertions go in
-`IntegrationTests`, live-circuit assertions go in `E2ETests`.
+HTTP-shaped assertions go in `IntegrationTests`; anything needing a live Blazor circuit goes in
+`E2ETests`.
