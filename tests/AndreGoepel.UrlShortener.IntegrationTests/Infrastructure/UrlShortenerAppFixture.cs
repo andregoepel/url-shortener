@@ -5,25 +5,27 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Testcontainers.PostgreSql;
 
 namespace AndreGoepel.UrlShortener.IntegrationTests.Infrastructure;
 
 /// <summary>
 /// The one collection fixture: one Postgres container + one booted app, shared by every test
-/// in the assembly. Owns its own <see cref="PostgreSqlContainer"/> rather than composing
-/// <c>AndreGoepel.Marten.Testing</c>'s <c>MartenFixture</c> — that fixture doesn't expose its
-/// container's connection string, so it cannot point a second consumer (this app's own Marten,
-/// booted by <see cref="WebApplicationFactory{TEntryPoint}"/>) at the same database. Still
-/// depends on the package purely for <see cref="MartenFixture.PostgresImage"/>, so the pinned
-/// Postgres digest stays in lockstep with every other repo in the ecosystem.
+/// in the assembly. The container comes from <c>AndreGoepel.Marten.Testing</c>'s
+/// <see cref="MartenFixture"/>, so the pinned Postgres digest stays in lockstep with every
+/// other repo in the ecosystem; the app booted by
+/// <see cref="WebApplicationFactory{TEntryPoint}"/> is pointed at
+/// <see cref="MartenFixture.ConnectionString"/> and its own Marten store (<see cref="Store"/>)
+/// is the one every assertion reads.
 /// </summary>
 public sealed class UrlShortenerAppFixture : WebApplicationFactory<Program>, IAsyncLifetime
 {
     private readonly int _permitLimit;
-    private readonly PostgreSqlContainer _postgres = new PostgreSqlBuilder(
-        MartenFixture.PostgresImage
-    ).Build();
+
+    /// <summary>
+    /// Composed purely for its Postgres container — the app brings its own Marten store, so
+    /// <see cref="MartenFixture.Store"/> stays unused.
+    /// </summary>
+    private readonly MartenFixture _postgres = new();
 
     /// <summary>Used by xUnit's collection-fixture activator, which needs a zero-arg constructor.</summary>
     public UrlShortenerAppFixture()
@@ -47,7 +49,9 @@ public sealed class UrlShortenerAppFixture : WebApplicationFactory<Program>, IAs
 
     public async ValueTask InitializeAsync()
     {
-        await _postgres.StartAsync(TestContext.Current.CancellationToken);
+        // Must come first: ConfigureWebHost reads MartenFixture.ConnectionString, which is only
+        // valid once the container is running.
+        await _postgres.InitializeAsync();
         _ = Server; // forces host creation (and thus CreateHost below)
     }
 
@@ -62,10 +66,7 @@ public sealed class UrlShortenerAppFixture : WebApplicationFactory<Program>, IAs
         // Development: AutoCreate.All (schema built on first use), no HSTS / security-header
         // middleware, and EnsureKeyRingProtected does not throw over the unencrypted key ring.
         builder.UseEnvironment("Development");
-        builder.UseSetting(
-            "ConnectionStrings:appfoundation-database",
-            _postgres.GetConnectionString()
-        );
+        builder.UseSetting("ConnectionStrings:appfoundation-database", _postgres.ConnectionString);
         // Raised well above production default (10/min) so the bulk of the suite never trips
         // it. The one test that asserts the limit spins up its own dedicated instance of this
         // fixture with a low permitLimit instead of reconfiguring this shared one: WithWebHostBuilder
