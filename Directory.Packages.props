@@ -12,12 +12,12 @@
   <ItemGroup Label="Aspire">
     <PackageVersion Include="Aspire.Hosting.Docker" Version="13.5.2" />
     <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.5.2" />
-    <PackageVersion Include="Aspire.Hosting.Testing" Version="13.5.2" />
+    <PackageVersion Include="Aspire.Hosting.Testing" Version="13.5.3" />
   </ItemGroup>
 
   <ItemGroup Label="Libraries">
-    <PackageVersion Include="Marten" Version="9.29.0" />
-    <PackageVersion Include="Radzen.Blazor" Version="11.2.6" />
+    <PackageVersion Include="Marten" Version="9.30.0" />
+    <PackageVersion Include="Radzen.Blazor" Version="11.2.8" />
     <PackageVersion Include="QRCoder" Version="1.8.0" />
     <PackageVersion
       Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets"
@@ -28,7 +28,7 @@
   <ItemGroup Label="Testing">
     <PackageVersion Include="AndreGoepel.Marten.Testing" Version="1.2.0" />
     <PackageVersion Include="AndreGoepel.Testing.E2E" Version="1.3.0" />
-    <PackageVersion Include="AngleSharp" Version="1.7.1" />
+    <PackageVersion Include="AngleSharp" Version="1.7.2" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.11" />
     <PackageVersion Include="Microsoft.Playwright" Version="1.62.0" />
     <PackageVersion Include="coverlet.collector" Version="10.0.1" />
