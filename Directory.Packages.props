@@ -6,7 +6,7 @@
   <ItemGroup Label="AndreGoepel">
     <PackageVersion Include="AndreGoepel.AppFoundation" Version="2.1.1" />
     <PackageVersion Include="AndreGoepel.AppFoundation.Hosting" Version="2.1.1" />
-    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="2.0.2" />
+    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup Label="Aspire">
@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Libraries">
-    <PackageVersion Include="Marten" Version="9.33.0" />
+    <PackageVersion Include="Marten" Version="9.34.0" />
     <PackageVersion Include="Radzen.Blazor" Version="11.3.2" />
     <PackageVersion Include="QRCoder" Version="1.8.0" />
     <PackageVersion
@@ -34,6 +34,6 @@
     <PackageVersion Include="coverlet.collector" Version="10.0.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
-    <PackageVersion Include="xunit.v3" Version="4.0.0" />
+    <PackageVersion Include="xunit.v3" Version="4.0.1" />
   </ItemGroup>
 </Project>
