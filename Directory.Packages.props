@@ -4,9 +4,9 @@
   </PropertyGroup>
 
   <ItemGroup Label="AndreGoepel">
-    <PackageVersion Include="AndreGoepel.AppFoundation" Version="2.1.1" />
-    <PackageVersion Include="AndreGoepel.AppFoundation.Hosting" Version="2.1.1" />
-    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="2.0.2" />
+    <PackageVersion Include="AndreGoepel.AppFoundation" Version="2.2.0" />
+    <PackageVersion Include="AndreGoepel.AppFoundation.Hosting" Version="2.2.0" />
+    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup Label="Aspire">

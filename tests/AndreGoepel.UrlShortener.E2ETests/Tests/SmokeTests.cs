@@ -7,6 +7,7 @@ public sealed class SmokeTests(E2EAppFixture fixture) : E2ETestBase<E2EAppFixtur
     public async Task PublicHome_ShortenValidUrl_ShowsShortLinkAndQr()
     {
         // Arrange
+        await Fixture.ProvisionAdminAsync();
         await Page.GotoAsync("/");
         await Page.WaitForBlazorAsync();
 
@@ -29,6 +30,7 @@ public sealed class SmokeTests(E2EAppFixture fixture) : E2ETestBase<E2EAppFixtur
         // Arrange — a real outbound target, since UrlValidator forbids localhost/private
         // addresses so a fully offline target is impossible. Assert only that the browser left
         // the app (not on example.com's content) per the E2E project's no-network exception.
+        await Fixture.ProvisionAdminAsync();
         await Page.GotoAsync("/");
         await Page.WaitForBlazorAsync();
         var slug = await Page.ShortenAsync("https://example.com/e2e-redirect-target");

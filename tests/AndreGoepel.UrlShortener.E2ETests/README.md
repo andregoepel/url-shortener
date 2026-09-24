@@ -21,8 +21,10 @@ handlers over a SignalR circuit, reachable only by a real browser.
 - **Microsoft.Playwright** (Chromium) drives the browser. Each test gets a fresh
   `IBrowserContext` so cookies never leak between tests.
 - The suite runs **serially** inside one xUnit collection because it shares a single app instance
-  and database. The first test that needs it provisions the root administrator exactly once via
-  the `/Setup` flow (`E2EAppFixture.ProvisionAdminAsync`, idempotent).
+  and database. Public-create and admin tests provision the root administrator exactly once via
+  the `/Setup` flow (`E2EAppFixture.ProvisionAdminAsync`, idempotent) before navigating to app
+  pages, because Marten Identity redirects browser navigation to `/Setup` until bootstrap is
+  complete.
 
 ## Prerequisites
 

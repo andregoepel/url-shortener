@@ -18,6 +18,7 @@ public sealed class AdminLinksTests(E2EAppFixture fixture) : E2ETestBase<E2EAppF
     /// </summary>
     private async Task<string> CreateLinkAsync(string url, string? alias = null)
     {
+        await Fixture.ProvisionAdminAsync();
         await using var anonymousContext = await Fixture.NewContextAsync();
         var anonymousPage = await anonymousContext.NewPageAsync();
         await anonymousPage.GotoAsync("/");
