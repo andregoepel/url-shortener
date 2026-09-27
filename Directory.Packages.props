@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup Label="Libraries">
-    <PackageVersion Include="Marten" Version="9.39.0" />
-    <PackageVersion Include="Radzen.Blazor" Version="11.4.2" />
+    <PackageVersion Include="Marten" Version="9.39.1" />
+    <PackageVersion Include="Radzen.Blazor" Version="11.5.1" />
     <PackageVersion Include="QRCoder" Version="1.8.0" />
     <PackageVersion
       Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets"
