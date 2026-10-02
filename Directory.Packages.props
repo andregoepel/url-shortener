@@ -4,20 +4,21 @@
   </PropertyGroup>
 
   <ItemGroup Label="AndreGoepel">
-    <PackageVersion Include="AndreGoepel.AppFoundation" Version="2.2.0" />
-    <PackageVersion Include="AndreGoepel.AppFoundation.Hosting" Version="2.2.0" />
-    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="2.1.1" />
+    <PackageVersion Include="AndreGoepel.Design.Blazor" Version="1.7.0" />
+    <PackageVersion Include="AndreGoepel.AppFoundation" Version="2.2.1" />
+    <PackageVersion Include="AndreGoepel.AppFoundation.Hosting" Version="2.2.1" />
+    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup Label="Aspire">
     <PackageVersion Include="Aspire.Hosting.Docker" Version="13.5.3" />
-    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.5.3" />
-    <PackageVersion Include="Aspire.Hosting.Testing" Version="13.5.4" />
+    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.6.0" />
+    <PackageVersion Include="Aspire.Hosting.Testing" Version="13.6.0" />
   </ItemGroup>
 
   <ItemGroup Label="Libraries">
-    <PackageVersion Include="Marten" Version="9.39.0" />
-    <PackageVersion Include="Radzen.Blazor" Version="11.4.2" />
+    <PackageVersion Include="Marten" Version="9.45.0" />
+    <PackageVersion Include="Radzen.Blazor" Version="12.0.5" />
     <PackageVersion Include="QRCoder" Version="1.8.0" />
     <PackageVersion
       Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets"
@@ -26,12 +27,12 @@
   </ItemGroup>
 
   <ItemGroup Label="Testing">
-    <PackageVersion Include="AndreGoepel.Marten.Testing" Version="1.2.4" />
-    <PackageVersion Include="AndreGoepel.Testing.E2E" Version="1.3.3" />
-    <PackageVersion Include="AngleSharp" Version="1.8.2" />
+    <PackageVersion Include="AndreGoepel.Marten.Testing" Version="1.2.5" />
+    <PackageVersion Include="AndreGoepel.Testing.E2E" Version="1.3.4" />
+    <PackageVersion Include="AngleSharp" Version="1.8.3" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.12" />
     <PackageVersion Include="Microsoft.Playwright" Version="1.63.0" />
-    <PackageVersion Include="coverlet.collector" Version="10.0.1" />
+    <PackageVersion Include="coverlet.collector" Version="10.1.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
     <PackageVersion Include="xunit.v3" Version="4.0.1" />
