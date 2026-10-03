@@ -4,14 +4,14 @@
   </PropertyGroup>
 
   <ItemGroup Label="AndreGoepel">
-    <PackageVersion Include="AndreGoepel.Design.Blazor" Version="1.7.0" />
-    <PackageVersion Include="AndreGoepel.AppFoundation" Version="2.2.3" />
-    <PackageVersion Include="AndreGoepel.AppFoundation.Hosting" Version="2.2.3" />
-    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="2.1.3" />
+    <PackageVersion Include="AndreGoepel.Design.Blazor" Version="1.7.1" />
+    <PackageVersion Include="AndreGoepel.AppFoundation" Version="2.3.0" />
+    <PackageVersion Include="AndreGoepel.AppFoundation.Hosting" Version="2.3.0" />
+    <PackageVersion Include="AndreGoepel.Marten.Identity.Blazor" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup Label="Aspire">
-    <PackageVersion Include="Aspire.Hosting.Docker" Version="13.5.3" />
+    <PackageVersion Include="Aspire.Hosting.Docker" Version="13.6.0" />
     <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.6.0" />
     <PackageVersion Include="Aspire.Hosting.Testing" Version="13.6.0" />
   </ItemGroup>
